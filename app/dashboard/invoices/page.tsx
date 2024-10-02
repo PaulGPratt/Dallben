@@ -8,17 +8,17 @@ import { Suspense } from 'react';
 import { fetchInvoicesPages } from '../../lib/data';
 
 export default async function Page({ searchParams }: {
-    searchParams?: {
+    searchParams?: Promise<{
         query?: string;
         page?: string;
-    }
+    }>;
 }) {
     const search = await searchParams;
     const query = await search?.query || '';
     const currentPage = Number(search?.page) || 1;
 
     const totalPages = await fetchInvoicesPages(query);
-    
+
     return (
         <div className="w-full">
             <div className="flex w-full items-center justify-between">
